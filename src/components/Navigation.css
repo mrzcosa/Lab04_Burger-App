@@ -1,0 +1,15 @@
+.site-header { position: relative; z-index: 20; border-bottom: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,.03); }
+.header-inner { max-width: 1050px; min-height: 92px; padding: 10px 16px; margin: auto; display: flex; align-items: center; gap: 22px; }
+.logo-button { border: 0; background: transparent; padding: 0; margin-right: auto; }
+.logo-button img { width: 148px; display: block; }
+.main-nav { display: flex; gap: 27px; align-items: center; }
+.main-nav button { border: 0; background: transparent; color: #3d3937; font-size: 14px; font-weight: 800; padding: 10px 0; }
+.main-nav button:hover, .main-nav button.active { color: var(--red); }
+.cart-button { position: relative; border: 0; background: transparent; color: #444; width: 30px; height: 36px; padding: 0; }
+.cart-button b { position: absolute; right: -5px; top: 1px; min-width: 17px; height: 17px; border-radius: 50%; background: var(--red); color: #fff; font: 11px/17px Arial, sans-serif; }
+.bag-icon { width: 18px; height: 18px; display: inline-block; border: 1.6px solid #555; border-radius: 2px; position: relative; top: 4px; }
+.bag-icon span { width: 8px; height: 6px; position: absolute; left: 3px; top: -6px; border: 1.6px solid #555; border-bottom: 0; border-radius: 6px 6px 0 0; }
+.menu-toggle { display: none; border: 0; background: transparent; padding: 7px; }
+.menu-toggle span { display: block; width: 22px; height: 2px; margin: 4px; background: var(--brown); }
+@media (max-width: 800px) { .header-inner { min-height: 76px; }.menu-toggle { display: block; order: 2; }.cart-button { order: 3; }.main-nav { display: none; position: absolute; top: 76px; left: 0; right: 0; z-index: 2; background: #fff; border-bottom: 1px solid var(--border); padding: 10px 20px; flex-direction: column; gap: 2px; align-items: stretch; }.main-nav.open { display: flex; }.main-nav button { text-align: left; padding: 11px 0; } }
+@media (max-width: 500px) { .header-inner { padding: 8px 15px; }.logo-button img { width: 128px; } }
