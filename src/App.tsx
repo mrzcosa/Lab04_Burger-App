@@ -15,12 +15,31 @@ function App() {
   const [cart, setCart] = useState<CartItem[]>(() => readStorage('burger-cart', []))
   const [favorites, setFavorites] = useState<number[]>(() => readStorage('burger-favorites', []))
   const [menuOpen, setMenuOpen] = useState(false)
+  const [navigationTarget, setNavigationTarget] = useState({ hash: window.location.hash })
   const [selectedProduct, setSelectedProduct] = useState<ProductData | null>(null)
   const [isVariationModalOpen, setIsVariationModalOpen] = useState(false)
   useEffect(() => localStorage.setItem('burger-cart', JSON.stringify(cart)), [cart])
   useEffect(() => localStorage.setItem('burger-favorites', JSON.stringify(favorites)), [favorites])
-  useEffect(() => { const onPopState = () => setPath(window.location.pathname); window.addEventListener('popstate', onPopState); return () => window.removeEventListener('popstate', onPopState) }, [])
-  const navigate = (nextPath: string) => { window.history.pushState({}, '', nextPath); setPath(nextPath); setMenuOpen(false) }
+  useEffect(() => {
+    const onPopState = () => {
+      setPath(window.location.pathname)
+      setNavigationTarget({ hash: window.location.hash })
+    }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
+  useEffect(() => {
+    if (!navigationTarget.hash) return
+    const section = document.getElementById(navigationTarget.hash.slice(1))
+    section?.scrollIntoView({ behavior: 'instant', block: 'start' })
+  }, [navigationTarget])
+  const navigate = (nextPath: string) => {
+    const target = new URL(nextPath, window.location.origin)
+    window.history.pushState({}, '', target)
+    setPath(target.pathname)
+    setNavigationTarget({ hash: target.hash })
+    setMenuOpen(false)
+  }
   const openProduct = (product: ProductData) => { setSelectedProduct(product); setIsVariationModalOpen(true) }
   const addToCart = (product: ProductData, variation?: BurgerVariation, quantity = 1) => {
     if (!variation) { openProduct(product); return }

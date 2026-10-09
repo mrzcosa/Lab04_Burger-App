@@ -10,6 +10,7 @@ type MenuMegaDropDownProps = {
 type MenuCategoryData = {
   name: string
   megaIcon: string
+  targetId: string
 }
 
 const megaIcons = import.meta.glob<string>('../assets/MenuMegaDropDown icons/*.png', { eager: true, query: '?url', import: 'default' })
@@ -18,32 +19,32 @@ const menuColumns: { title: string; categories: MenuCategoryData[] }[] = [
   {
     title: 'FEATURED & BURGERS',
     categories: [
-      { name: 'Featured', megaIcon: 'Featured.png' },
-      { name: 'Group Meals', megaIcon: 'Group meals.png' },
-      { name: 'King Savings Bundles', megaIcon: 'TB Savers Bundles.png' },
-      { name: 'Whopper', megaIcon: 'Whopper.png' },
-      { name: '4-Cheese Whopper', megaIcon: '4-Cheese Whopper.png' },
-      { name: 'Plant-Based Whopper', megaIcon: 'Plant-Based Whopper.png' },
+      { name: 'Featured', megaIcon: 'Featured.png', targetId: 'featured' },
+      { name: 'Group Meals', megaIcon: 'Group meals.png', targetId: 'group-meals' },
+      { name: 'King Savings Bundles', megaIcon: 'TB Savers Bundles.png', targetId: 'tb-savers' },
+      { name: 'Whopper', megaIcon: 'Whopper.png', targetId: 'whopper' },
+      { name: '4-Cheese Whopper', megaIcon: '4-Cheese Whopper.png', targetId: 'four-cheese-whopper' },
+      { name: 'Plant-Based Whopper', megaIcon: 'Plant-Based Whopper.png', targetId: 'plant-based-whopper' },
     ],
   },
   {
     title: 'CHICKEN & CLASSICS',
     categories: [
-      { name: 'All-Day Breakfast', megaIcon: 'All-day breakfast.png' },
-      { name: 'Chicken', megaIcon: 'TB king.png' },
-      { name: 'X-tra Long Chicken', megaIcon: 'X-tra Long Chicken.png' },
-      { name: 'Flame-Grilled Cheeseburger', megaIcon: 'Flame-Grilled Cheeseburger.png' },
-      { name: 'TB Special', megaIcon: 'TB Special.png' },
+      { name: 'All-Day Breakfast', megaIcon: 'All-day breakfast.png', targetId: 'all-day-breakfast' },
+      { name: 'Chicken', megaIcon: 'TB king.png', targetId: 'tb-chicken-burger' },
+      { name: 'X-tra Long Chicken', megaIcon: 'X-tra Long Chicken.png', targetId: 'xtra-long-chicken' },
+      { name: 'Flame-Grilled Cheeseburger', megaIcon: 'Flame-Grilled Cheeseburger.png', targetId: 'flame-grilled' },
+      { name: 'TB Special', megaIcon: 'TB Special.png', targetId: 'tb-special' },
     ],
   },
   {
     title: 'SIDES & SIPS',
     categories: [
-      { name: 'Chicken Rice Meals', megaIcon: 'Chicken Rice Meals.png' },
-      { name: 'Steakicks', megaIcon: 'Ultimate Side Kicks.png' },
-      { name: 'Café', megaIcon: 'TB Cafe.png' },
-      { name: 'Drinks', megaIcon: 'Drinks.png' },
-      { name: 'Desserts', megaIcon: 'Desserts.png' },
+      { name: 'Chicken Rice Meals', megaIcon: 'Chicken Rice Meals.png', targetId: 'chicken-rice-meals' },
+      { name: 'Steakicks', megaIcon: 'Ultimate Side Kicks.png', targetId: 'ultimate-side-kicks' },
+      { name: 'Café', megaIcon: 'TB Cafe.png', targetId: 'tb-cafe' },
+      { name: 'Drinks', megaIcon: 'Drinks.png', targetId: 'drinks' },
+      { name: 'Desserts', megaIcon: 'Desserts.png', targetId: 'desserts' },
     ],
   },
 ]
@@ -60,7 +61,7 @@ function MenuMegaDropDown({ isOpen, onPointerEnter, onPointerLeave, onNavigate }
         <div className="mega-menu-categories">
           {column.categories.map((category) => {
             const categoryIcon = assetUrl(megaIcons, category.megaIcon)
-            return <button className="mega-menu-category" key={category.name} tabIndex={isOpen ? 0 : -1} onClick={() => onNavigate('/menu')}>
+            return <button className="mega-menu-category" key={category.name} tabIndex={isOpen ? 0 : -1} onClick={() => onNavigate(`/menu#${category.targetId}`)}>
               {categoryIcon && <img className="mega-menu-section-icon" src={categoryIcon} alt="" />}
               <span>{category.name}</span>
             </button>
