@@ -62,7 +62,7 @@ import icedTeaImage from '../assets/MenuCategory/Drinks/Iced Tea.png'
 import rootbeerFloatImage from '../assets/MenuCategory/Drinks/Rootbeer Float.png'
 
 export type BurgerVariation = { id: 'regular' | 'with-fries' | 'combo'; name: string; description: string; image: string; price: number }
-export type Product = { id: number; name: string; description: string; price: number; rating: number; image: string; imageFit?: 'cover' | 'contain'; variations?: BurgerVariation[] }
+export type Product = { id: number; name: string; description: string; price: number; rating: number; image: string; imageFit?: 'cover' | 'contain'; quickViewLabel?: 'VIEW BURGER' | 'View order'; variations?: BurgerVariation[] }
 export const products: Product[] = [
   { id: 1, name: 'Crispy Chicken', description: 'Chicken breast, chilli sauce, tomatoes, pickles, coleslaw', price: 129, rating: 5, image: burger1 },
   { id: 2, name: 'Ultimate Bacon', description: 'House patty, cheddar cheese, bacon, onion, mustard', price: 149, rating: 4.5, image: burger2 },
@@ -75,6 +75,7 @@ export const groupMealProducts: Product[] = ([
   { id: 7, name: "King Feast: Mix 'n Feast for 4", description: 'A feast of burgers, sides, and drinks to share', price: 899, rating: 5, image: groupMealFor4, imageFit: 'contain' },
  ] satisfies Product[]).map((product) => ({
   ...product,
+  quickViewLabel: 'View order',
   variations: [{ id: 'regular', name: 'Group Meal', description: product.description, image: product.image, price: product.price }],
 }))
 export const tbSaversProducts: Product[] = ([
@@ -82,6 +83,7 @@ export const tbSaversProducts: Product[] = ([
   { id: 9, name: 'TB Savers Bundle 299', description: 'A bigger burger meal at a great value', price: 299, rating: 5, image: tbSavers299, imageFit: 'contain' },
 ] satisfies Product[]).map((product) => ({
   ...product,
+  quickViewLabel: 'View order',
   variations: [{ id: 'regular', name: 'TB Savers Bundle', description: product.description, image: product.image, price: product.price }],
 }))
 export const whopperProducts: Product[] = ([
@@ -117,6 +119,7 @@ export const allDayBreakfastProducts: Product[] = ([
   { id: 24, name: '2-pc. Waffle with Maple and Sausage', description: 'Two maple waffles served with savory sausage', price: 149, rating: 5, image: waffleWithMapleAndSausage, imageFit: 'contain' },
 ] satisfies Product[]).map((product) => ({
   ...product,
+  quickViewLabel: 'View order',
   variations: [{ id: 'regular', name: product.name, description: product.description, image: product.image, price: product.price }],
 }))
 export const tbChickenBurgerProducts: Product[] = ([
@@ -142,6 +145,7 @@ export const flameGrilledProducts: Product[] = [{
   rating: 5,
   image: flameGrilledBbhImage,
   imageFit: 'contain',
+  quickViewLabel: 'VIEW BURGER',
   variations: [{ id: 'regular', name: 'Flame-Grilled BBQ Hamburger', description: 'Flame-grilled beef patty topped with BBQ sauce', image: flameGrilledBbhImage, price: 129 }],
 }]
 export const tbSpecialProducts: Product[] = [{
@@ -152,6 +156,7 @@ export const tbSpecialProducts: Product[] = [{
   rating: 5,
   image: tbSpecialImage,
   imageFit: 'contain',
+  quickViewLabel: 'VIEW BURGER',
   variations: [{ id: 'regular', name: 'TB Special', description: 'A tasty signature burger with fresh toppings', image: tbSpecialImage, price: 199 }],
 }]
 export const chickenRiceMealProducts: Product[] = ([
@@ -160,6 +165,7 @@ export const chickenRiceMealProducts: Product[] = ([
   { id: 36, name: 'Smoky BBQ Chunky Chicken Fillet', description: 'Crispy chicken fillet with smoky BBQ sauce, served with rice', price: 199, rating: 5, image: smokyBbqChickenFilletImage, imageFit: 'contain' },
 ] satisfies Product[]).map((product) => ({
   ...product,
+  quickViewLabel: 'View order',
   variations: [{ id: 'regular', name: product.name, description: product.description, image: product.image, price: product.price }],
 }))
 export const ultimateSideKicksProducts: Product[] = ([
@@ -177,6 +183,7 @@ export const ultimateSideKicksProducts: Product[] = ([
   { id: 48, name: 'Chicken Nuggets Sharing Pack', description: 'A larger serving of crispy chicken nuggets to share', price: 299, rating: 5, image: chickenNuggets10PcImage, imageFit: 'contain' },
 ] satisfies Product[]).map((product) => ({
   ...product,
+  quickViewLabel: 'View order',
   variations: [{ id: 'regular', name: product.name, description: product.description, image: product.image, price: product.price }],
 }))
 export const tbCafeProducts: Product[] = [{
@@ -187,6 +194,7 @@ export const tbCafeProducts: Product[] = [{
   rating: 5,
   image: sweetBlackAffogatoImage,
   imageFit: 'contain',
+  quickViewLabel: 'View order',
   variations: [{ id: 'regular', name: 'Sweet Black Affogato-style', description: 'A rich coffee-inspired treat with a sweet, creamy finish', image: sweetBlackAffogatoImage, price: 129 }],
 }]
 export const drinkProducts: Product[] = ([
@@ -196,6 +204,7 @@ export const drinkProducts: Product[] = ([
   { id: 57, name: 'Root Beer Float', description: 'Chilled root beer topped with creamy vanilla soft serve', price: 89, rating: 5, image: rootbeerFloatImage, imageFit: 'contain' },
 ] satisfies Product[]).map((product) => ({
   ...product,
+  quickViewLabel: 'View order',
   variations: [{ id: 'regular', name: product.name, description: product.description, image: product.image, price: product.price }],
 }))
 export const dessertProducts: Product[] = ([
@@ -205,6 +214,7 @@ export const dessertProducts: Product[] = ([
   { id: 53, name: 'Sundae with Nutella', description: 'Creamy soft serve finished with a swirl of Nutella', price: 99, rating: 5, image: sundaeWithNutellaImage, imageFit: 'contain' },
 ] satisfies Product[]).map((product) => ({
   ...product,
+  quickViewLabel: 'View order',
   variations: [{ id: 'regular', name: product.name, description: product.description, image: product.image, price: product.price }],
 }))
 const variationImages = [[burger1WithFries, burger1Combo], [burger2WithFries, burger2Combo], [burger3WithFries, burger3Combo], [burger4WithFries, burger4Combo]]

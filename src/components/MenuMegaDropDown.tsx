@@ -41,7 +41,7 @@ const menuColumns: { title: string; categories: MenuCategoryData[] }[] = [
     title: 'SIDES & SIPS',
     categories: [
       { name: 'Chicken Rice Meals', megaIcon: 'Chicken Rice Meals.png', targetId: 'chicken-rice-meals' },
-      { name: 'Steakicks', megaIcon: 'Ultimate Side Kicks.png', targetId: 'ultimate-side-kicks' },
+      { name: 'Ultimate Side Kicks', megaIcon: 'Ultimate Side Kicks.png', targetId: 'ultimate-side-kicks' },
       { name: 'Café', megaIcon: 'TB Cafe.png', targetId: 'tb-cafe' },
       { name: 'Drinks', megaIcon: 'Drinks.png', targetId: 'drinks' },
       { name: 'Desserts', megaIcon: 'Desserts.png', targetId: 'desserts' },

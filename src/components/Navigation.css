@@ -1,4 +1,4 @@
-.site-header { position: relative; z-index: 20; border-bottom: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,.03); }
+.site-header { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,.03); }
 .header-inner { max-width: 1050px; min-height: 92px; padding: 10px 16px; margin: auto; display: flex; align-items: center; gap: 22px; }
 .logo-button { border: 0; background: transparent; padding: 0; margin-right: auto; }
 .logo-button img { width: 148px; display: block; }
