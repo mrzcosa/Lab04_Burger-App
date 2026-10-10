@@ -1,0 +1,36 @@
+.hero-banner {
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  margin: 0 0 54px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #24100c;
+}
+
+.hero-banner-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 650ms ease-in-out;
+}
+
+.hero-banner-track.is-resetting {
+  transition: none;
+}
+
+.hero-banner-track img {
+  width: 100%;
+  height: 100%;
+  flex: 0 0 100%;
+  object-fit: fill;
+}
+
+@media (max-width: 520px) {
+  .hero-banner { margin-bottom: 36px; border-radius: 7px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-banner-track {
+    transition-duration: 0.01ms;
+  }
+}
