@@ -50,7 +50,7 @@ function Navigation({ path, menuOpen, itemCount, logo, onNavigate, onToggleMenu 
   return (
     <header className="site-header">
       <div className="header-inner">
-        <button className="logo-button" onClick={() => onNavigate('/')} aria-label="Tasty Burger home"><img src={logo} alt="Tasty Burger" /></button>
+        <button className="logo-button" onClick={() => onNavigate('/#hero-banner')} aria-label="Tasty Burger home"><img src={logo} alt="Tasty Burger" /></button>
         <button className="menu-toggle" onClick={onToggleMenu} aria-label="Toggle navigation" aria-expanded={menuOpen}><span /><span /><span /></button>
         <nav className={menuOpen ? 'main-nav open' : 'main-nav'} aria-label="Main navigation">{navItems.map(([label, url]) => label === 'MENU' ? <div className="menu-nav-item" key={url} ref={menuAreaRef} onMouseEnter={() => { keepMegaMenuOpen(); if (!isMobile()) setMegaMenuOpen(true) }} onMouseLeave={scheduleMegaMenuClose} onFocus={() => { if (!isMobile()) setMegaMenuOpen(true) }}>
           <button className={path === url || megaMenuOpen ? 'active' : ''} aria-expanded={megaMenuOpen} aria-haspopup="true" onClick={() => { if (isMobile()) setMegaMenuOpen((open) => !open); else onNavigate(url) }}>{label}</button>
