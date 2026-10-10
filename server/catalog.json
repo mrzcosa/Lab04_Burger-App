@@ -1,0 +1,649 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Crispy Chicken",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Regular Burger",
+          "priceCents": 12900
+        },
+        {
+          "id": "with-fries",
+          "name": "Burger + Fries",
+          "priceCents": 15900
+        },
+        {
+          "id": "combo",
+          "name": "Combo Meal",
+          "priceCents": 17900
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Ultimate Bacon",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Regular Burger",
+          "priceCents": 14900
+        },
+        {
+          "id": "with-fries",
+          "name": "Burger + Fries",
+          "priceCents": 17900
+        },
+        {
+          "id": "combo",
+          "name": "Combo Meal",
+          "priceCents": 19900
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Black Sheep",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Regular Burger",
+          "priceCents": 15900
+        },
+        {
+          "id": "with-fries",
+          "name": "Burger + Fries",
+          "priceCents": 18900
+        },
+        {
+          "id": "combo",
+          "name": "Combo Meal",
+          "priceCents": 20900
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Vegan Burger",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Regular Burger",
+          "priceCents": 17900
+        },
+        {
+          "id": "with-fries",
+          "name": "Burger + Fries",
+          "priceCents": 20900
+        },
+        {
+          "id": "combo",
+          "name": "Combo Meal",
+          "priceCents": 22900
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "King Feast: Mix 'n Feast for 2",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Group Meal",
+          "priceCents": 49900
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "King Feast: Mix 'n Feast for 3",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Group Meal",
+          "priceCents": 69900
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "King Feast: Mix 'n Feast for 4",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Group Meal",
+          "priceCents": 89900
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "TB Savers Bundle 199",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "TB Savers Bundle",
+          "priceCents": 19900
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "TB Savers Bundle 299",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "TB Savers Bundle",
+          "priceCents": 29900
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Whopper",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Whopper",
+          "priceCents": 19900
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Whopper Jr.",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Whopper Jr.",
+          "priceCents": 14900
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "4-Cheese Whopper",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "4-Cheese Whopper",
+          "priceCents": 24900
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "4-Cheese Whopper Jr.",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "4-Cheese Whopper Jr.",
+          "priceCents": 19900
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "X-tra Long Chicken Sandwich",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "X-tra Long Chicken Sandwich",
+          "priceCents": 22900
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "X-tra Long Chicken Jr. Sandwich",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "X-tra Long Chicken Jr. Sandwich",
+          "priceCents": 17900
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Waffle Sausage King with Egg",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Waffle Sausage King with Egg",
+          "priceCents": 14900
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Waffle Sausage King with Cheese",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Waffle Sausage King with Cheese",
+          "priceCents": 15900
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Hash Bites",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Hash Bites",
+          "priceCents": 5900
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Breakfast Sausage Bowl",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Breakfast Sausage Bowl",
+          "priceCents": 12900
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "name": "2-pc. Waffles with Nutella Solo",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "2-pc. Waffles with Nutella Solo",
+          "priceCents": 11900
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "name": "2-pc. Waffles with Nutella Combo",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "2-pc. Waffles with Nutella Combo",
+          "priceCents": 17900
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "name": "2-pc. Waffles and Chicken",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "2-pc. Waffles and Chicken",
+          "priceCents": 19900
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "name": "2-pc. Waffle with Maple",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "2-pc. Waffle with Maple",
+          "priceCents": 9900
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "name": "2-pc. Waffle with Maple and Sausage",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "2-pc. Waffle with Maple and Sausage",
+          "priceCents": 14900
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Tasty Chicken",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Tasty Chicken",
+          "priceCents": 14900
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Spicy Chicken",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Spicy Chicken",
+          "priceCents": 16900
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "name": "BLT Spicy Chicken",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "BLT Spicy Chicken",
+          "priceCents": 18900
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Plant-Based Whopper",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Plant-Based Whopper",
+          "priceCents": 22900
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "name": "Plant-Based Whopper Jr.",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Plant-Based Whopper Jr.",
+          "priceCents": 17900
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Flame-Grilled BBQ Hamburger",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Flame-Grilled BBQ Hamburger",
+          "priceCents": 12900
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "name": "TB Special",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "TB Special",
+          "priceCents": 19900
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Creamy Parm Chunky Chicken Fillet",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Creamy Parm Chunky Chicken Fillet",
+          "priceCents": 19900
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "name": "Mushroom Gravy Chunky Chicken Fillet",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Mushroom Gravy Chunky Chicken Fillet",
+          "priceCents": 19900
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "name": "Smoky BBQ Chunky Chicken Fillet",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Smoky BBQ Chunky Chicken Fillet",
+          "priceCents": 19900
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "name": "4-pc. Chicken Nuggets",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "4-pc. Chicken Nuggets",
+          "priceCents": 9900
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "name": "6-pc. Chicken Nuggets",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "6-pc. Chicken Nuggets",
+          "priceCents": 14900
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "name": "10-pc. Chicken Nuggets",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "10-pc. Chicken Nuggets",
+          "priceCents": 22900
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "name": "Angry Dip",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Angry Dip",
+          "priceCents": 2500
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "name": "Bucket of Hash Bites",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Bucket of Hash Bites",
+          "priceCents": 14900
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "name": "Bucket of Thick-Cut Fries",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Bucket of Thick-Cut Fries",
+          "priceCents": 19900
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "name": "Cheesy Dip",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Cheesy Dip",
+          "priceCents": 2500
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "name": "Hash Bites",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Hash Bites",
+          "priceCents": 5900
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "name": "Onion Rings",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Onion Rings",
+          "priceCents": 9900
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "name": "Smoky BBQ Dip",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Smoky BBQ Dip",
+          "priceCents": 2500
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "name": "Thick-Cut Fries",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Thick-Cut Fries",
+          "priceCents": 7900
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "name": "Chicken Nuggets Sharing Pack",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Chicken Nuggets Sharing Pack",
+          "priceCents": 29900
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "name": "Sweet Black Affogato-style",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Sweet Black Affogato-style",
+          "priceCents": 12900
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "name": "Coca-Cola Float",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Coca-Cola Float",
+          "priceCents": 8900
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "name": "Coke Original Taste",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Coke Original Taste",
+          "priceCents": 5900
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "name": "Iced Tea",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Iced Tea",
+          "priceCents": 5900
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "name": "Root Beer Float",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Root Beer Float",
+          "priceCents": 8900
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "name": "Caramel Espresso Sundae",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Caramel Espresso Sundae",
+          "priceCents": 9900
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "name": "Caramel Sundae",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Caramel Sundae",
+          "priceCents": 7900
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "name": "Chocolate Sundae",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Chocolate Sundae",
+          "priceCents": 7900
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "name": "Sundae with Nutella",
+      "variations": [
+        {
+          "id": "regular",
+          "name": "Sundae with Nutella",
+          "priceCents": 9900
+        }
+      ]
+    }
+  ]
+}

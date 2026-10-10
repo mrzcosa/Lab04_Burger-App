@@ -1,75 +1,35 @@
-# React + TypeScript + Vite
+# Tasty Burger
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React, TypeScript, and Vite frontend with a Node.js and SQLite order API.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Use Node.js 24 or newer. Install the project dependencies, then run:
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```sh
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+The development command starts the Vite site and the order API. The menu's current item and variation prices are generated into a server-owned catalog before startup and before production builds. Checkout submits product IDs, quantities, and displayed prices; the API rejects stale prices and calculates the order total from its own catalog.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The development site listens on the local network so other devices on the same Wi-Fi/LAN can open it at `http://<this-computer's-local-IP>:5173`. Find the computer's IPv4 address with `ipconfig`. Allow Node.js through Windows Defender Firewall on private networks if prompted.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Cash orders are stored in `data/orders.sqlite`. Keep that file on persistent storage in production and include it in the application's backup plan. The API allocates unique, sequential queue numbers and safely returns the same order when a request is retried with its idempotency key.
 
+## Production
+
+```sh
+npm run build
+npm start
 ```
+
+`npm start` serves both the built frontend and the order API. Set `PORT` to choose the listening port and `DATABASE_PATH` to place SQLite on persistent storage. The runtime requires Node.js 24 or newer for its built-in SQLite module.
+
+## Cashier payment confirmation
+
+New cash orders are saved as **Pending Payment** and **Awaiting Payment**. A cashier system can confirm receipt by sending an authenticated `POST /api/orders/{queueNumber}/payment/confirm` request with an `Authorization: Bearer <key>` header. Configure `CASHIER_API_KEY` with a randomly generated secret of at least 32 characters. Successful confirmation changes the order to **Paid** and **Preparing**; repeated confirmations are safe. Do not expose this key in the browser.
+
+## Online payments
+
+Online payment is intentionally unavailable until a payment provider is configured. No payment is simulated or marked paid by the checkout UI. Provider credentials, payment-intent creation, and verified webhook handling must be added before enabling a wallet, card, or bank option.

@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import Checkout from './components/Checkout'
+import OrderConfirmation from './components/OrderConfirmation'
 import Banner from './components/Banner'
 import Navigation from './components/Navigation'
 import { AllDayBreakfastSection, BurgerVariationModal, ChickenRiceMealsSection, DessertsSection, DrinksSection, FlameGrilledSection, FourCheeseWhopperSection, GroupMeals, PlantBasedWhopperSection, Product, TBCafeSection, TBChickenBurgerSection, TBSaversBundles, TBSpecialSection, UltimateSideKicksSection, WhopperSection, XtraLongChickenSection } from './components/Product'
 import { getProductVariations } from './components/productData'
 import type { BurgerVariation, Product as ProductData } from './components/productData'
+import type { OrderSummary } from './checkout'
 import logo from './assets/tastyburger logo.png'
 import storeImage from './assets/Shop/Tasty Burger Official store.png'
 
@@ -94,6 +97,9 @@ function App() {
     setPath(target.pathname)
     setNavigationTarget({ hash: target.hash })
     setMenuOpen(false)
+    if (target.pathname.startsWith('/checkout') || target.pathname.startsWith('/orders/')) {
+      window.scrollTo({ top: 0, behavior: 'instant' })
+    }
   }
   const openProduct = (product: ProductData) => { setSelectedProduct(product); setIsVariationModalOpen(true) }
   const addToCart = (product: ProductData, variation?: BurgerVariation, quantity = 1) => {
@@ -108,9 +114,70 @@ function App() {
   const itemCount = cart.reduce((total, item) => total + item.quantity, 0)
   const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0)
   const isMenu = path === '/' || path === '/menu'
+  const orderQueueNumber = path.match(/^\/orders\/(A\d{3,})$/)?.[1]
   return <div className="app-shell">
     <Navigation path={path} menuOpen={menuOpen} itemCount={itemCount} logo={logo} onNavigate={navigate} onToggleMenu={() => setMenuOpen((open) => !open)} />
-    {isMenu ? <main className="menu-page"><Banner /><Product favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><GroupMeals favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><TBSaversBundles favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><WhopperSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><FourCheeseWhopperSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><XtraLongChickenSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><AllDayBreakfastSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><PlantBasedWhopperSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><TBChickenBurgerSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><FlameGrilledSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><TBSpecialSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><ChickenRiceMealsSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><UltimateSideKicksSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><TBCafeSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><DrinksSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /><DessertsSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} /></main> : path === '/cart' ? <main className="content-page cart-page"><h1>YOUR CART</h1>{cart.length === 0 ? <p className="empty-state">Your cart is waiting for something delicious.</p> : <><div className="cart-list">{cart.map((item) => <div className="cart-item" key={`${item.id}-${item.variation}`}><img src={item.image} alt="" /><div><h2>{item.name}</h2><p>₱{item.price.toFixed(2)} each</p><div className="quantity"><button onClick={() => changeQuantity(item.id, item.variation, -1)} disabled={item.quantity <= 1}>-</button><span>{item.quantity}</span><button onClick={() => changeQuantity(item.id, item.variation, 1)}>+</button></div></div><div className="cart-item-total"><strong>₱{(item.price * item.quantity).toFixed(2)}</strong><button className="delete-cart-item" onClick={() => removeFromCart(item.id, item.variation)} aria-label={`Remove ${item.name} from cart`} title={`Remove ${item.name}`}><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 3h6l1 2h4v2H4V5h4l1-2zm-2 6h2v9H7V9zm4 0h2v9h-2V9zm4 0h2v9h-2V9z" fill="currentColor" /></svg></button></div></div>)}</div><div className="cart-total"><span>SUBTOTAL</span><strong>₱{subtotal.toFixed(2)}</strong><button onClick={() => alert('Thanks for your order!')}>CHECKOUT</button></div></>}</main> : path === '/shop' ? <main className="restaurants-page"><div className="restaurants-content"><button className="back-home-button" onClick={() => navigate('/')}>‹ <span>Back to Home</span></button><h1>Restaurants</h1><section className="restaurant-feature" aria-label="Tasty Burger restaurants"><img src={storeImage} alt="Tasty Burger restaurant storefront" /><div className="restaurant-copy"><h2>Our stores are open for dine-in, take-out, drive-thru, and delivery from Monday to Sunday, however operating hours may vary per location.</h2><p>For more information, kindly contact our branches.</p></div></section><RestaurantBranchFeature /></div></main> : <main className="content-page"><h1>{path.slice(1).toUpperCase()}</h1><p>We're cooking up something delicious. Visit our menu to discover your next favorite burger.</p><button className="dark-button" onClick={() => navigate('/menu')}>VIEW OUR MENU</button></main>}
+    {isMenu ? <main className="menu-page">
+      <Banner />
+      <Product favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <GroupMeals favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <TBSaversBundles favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <WhopperSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <FourCheeseWhopperSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <XtraLongChickenSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <AllDayBreakfastSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <PlantBasedWhopperSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <TBChickenBurgerSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <FlameGrilledSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <TBSpecialSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <ChickenRiceMealsSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <UltimateSideKicksSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <TBCafeSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <DrinksSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <DessertsSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+    </main> : path === '/cart' ? <main className="content-page cart-page">
+      <h1>YOUR CART</h1>
+      {cart.length === 0 ? <p className="empty-state">Your cart is waiting for something delicious.</p> : <>
+        <div className="cart-list">{cart.map((item) => <div className="cart-item" key={`${item.id}-${item.variation}`}>
+          <img src={item.image} alt="" />
+          <div><h2>{item.name}</h2><p>₱{item.price.toFixed(2)} each</p><div className="quantity">
+            <button onClick={() => changeQuantity(item.id, item.variation, -1)} disabled={item.quantity <= 1}>-</button>
+            <span>{item.quantity}</span>
+            <button onClick={() => changeQuantity(item.id, item.variation, 1)}>+</button>
+          </div></div>
+          <div className="cart-item-total"><strong>₱{(item.price * item.quantity).toFixed(2)}</strong>
+            <button className="delete-cart-item" onClick={() => removeFromCart(item.id, item.variation)} aria-label={`Remove ${item.name} from cart`} title={`Remove ${item.name}`}>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 3h6l1 2h4v2H4V5h4l1-2zm-2 6h2v9H7V9zm4 0h2v9h-2V9zm4 0h2v9h-2V9z" fill="currentColor" /></svg>
+            </button>
+          </div>
+        </div>)}</div>
+        <div className="cart-total"><span>SUBTOTAL</span><strong>₱{subtotal.toFixed(2)}</strong>
+          <button onClick={() => navigate('/checkout')}>CHECKOUT</button>
+        </div>
+      </>}
+    </main> : path === '/checkout' || path === '/checkout/review' ? <Checkout
+      path={path}
+      cart={cart}
+      subtotal={subtotal}
+      onNavigate={navigate}
+      onOrderCreated={(order: OrderSummary) => { setCart([]); navigate(`/orders/${order.queueNumber}`) }}
+    /> : orderQueueNumber ? <OrderConfirmation queueNumber={orderQueueNumber} onNavigate={navigate} />
+    : path === '/shop' ? <main className="restaurants-page"><div className="restaurants-content">
+      <button className="back-home-button" onClick={() => navigate('/')}>‹ <span>Back to Home</span></button>
+      <h1>Restaurants</h1>
+      <section className="restaurant-feature" aria-label="Tasty Burger restaurants">
+        <img src={storeImage} alt="Tasty Burger restaurant storefront" />
+        <div className="restaurant-copy">
+          <h2>Our stores are open for dine-in, take-out, drive-thru, and delivery from Monday to Sunday, however operating hours may vary per location.</h2>
+          <p>For more information, kindly contact our branches.</p>
+        </div>
+      </section>
+      <RestaurantBranchFeature />
+    </div></main> : <main className="content-page">
+      <h1>{path.slice(1).toUpperCase()}</h1>
+      <p>We're cooking up something delicious. Visit our menu to discover your next favorite burger.</p>
+      <button className="dark-button" onClick={() => navigate('/menu')}>VIEW OUR MENU</button>
+    </main>}
     <BurgerVariationModal key={`${selectedProduct?.id ?? 'none'}-${isVariationModalOpen}`} product={selectedProduct} isOpen={isVariationModalOpen} onClose={() => { setIsVariationModalOpen(false); setSelectedProduct(null) }} onAddToCart={addToCart} />
   </div>
 }
