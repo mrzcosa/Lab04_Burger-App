@@ -39,7 +39,11 @@ function OrderConfirmation({ queueNumber, onNavigate }: OrderConfirmationProps) 
         </section>
       ) : (
         <section className="checkout-card confirmation-card">
-          <div className="confirmation-check" aria-hidden="true">✓</div>
+          <div className="confirmation-check" aria-hidden="true">
+            <svg viewBox="0 0 48 48" focusable="false">
+              <path d="m13 25 8 8 15-18" />
+            </svg>
+          </div>
           <p className="checkout-eyebrow">ORDER RECEIVED</p>
           <h1>Your order is in!</h1>
           <p className="confirmation-intro">Keep this number handy when you come to the counter.</p>

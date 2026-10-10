@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Checkout from './components/Checkout'
 import OrderConfirmation from './components/OrderConfirmation'
+import SiteFooter from './components/SiteFooter'
+import ContactPage from './components/ContactPage'
 import Banner from './components/Banner'
 import Navigation from './components/Navigation'
 import { AllDayBreakfastSection, BurgerVariationModal, ChickenRiceMealsSection, DessertsSection, DrinksSection, FlameGrilledSection, FourCheeseWhopperSection, GroupMeals, PlantBasedWhopperSection, Product, TBCafeSection, TBChickenBurgerSection, TBSaversBundles, TBSpecialSection, UltimateSideKicksSection, WhopperSection, XtraLongChickenSection } from './components/Product'
@@ -10,6 +12,8 @@ import type { BurgerVariation, Product as ProductData } from './components/produ
 import type { OrderSummary } from './checkout'
 import logo from './assets/tastyburger logo.png'
 import storeImage from './assets/Shop/Tasty Burger Official store.png'
+import grabLogo from './assets/Delivery Services/Grab.png'
+import foodpandaLogo from './assets/Delivery Services/FoodPanda.png'
 
 type CartItem = ProductData & { quantity: number; variation?: 'regular' | 'with-fries' | 'combo'; baseProduct?: string }
 const readStorage = <T,>(key: string, fallback: T): T => { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) as T : fallback } catch { return fallback } }
@@ -62,7 +66,7 @@ function RestaurantBranchFeature() {
       <p><strong>Business Hours</strong><br />10:00AM - 09:00PM</p>
       <p><strong>Delivery Hours</strong><br />10:00AM - 09:00PM</p>
       <div className="branch-services"><strong>Services</strong><span>Pick Up</span><span>Delivery</span><span>Dine-in</span></div>
-      <div className="delivery-platforms" aria-label="Available delivery platforms"><span className="grab-mark">Grab</span><span className="foodpanda-mark">foodpanda</span></div>
+      <div className="delivery-platforms" aria-label="Available delivery platforms"><img src={grabLogo} alt="Grab" /><img src={foodpandaLogo} alt="foodpanda" /></div>
     </div>
   </section> : <p className="locator-empty-state">No restaurant locations match your search.</p>}
   </>
@@ -70,12 +74,19 @@ function RestaurantBranchFeature() {
 
 function App() {
   const [path, setPath] = useState(window.location.pathname)
+  const [showIntro, setShowIntro] = useState(true)
   const [cart, setCart] = useState<CartItem[]>(() => readStorage('burger-cart', []))
   const [favorites, setFavorites] = useState<number[]>(() => readStorage('burger-favorites', []))
   const [menuOpen, setMenuOpen] = useState(false)
+  const [megaMenuOpen, setMegaMenuOpen] = useState(false)
   const [navigationTarget, setNavigationTarget] = useState({ hash: window.location.hash })
   const [selectedProduct, setSelectedProduct] = useState<ProductData | null>(null)
   const [isVariationModalOpen, setIsVariationModalOpen] = useState(false)
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const timer = window.setTimeout(() => setShowIntro(false), prefersReducedMotion ? 500 : 1400)
+    return () => window.clearTimeout(timer)
+  }, [])
   useEffect(() => localStorage.setItem('burger-cart', JSON.stringify(cart)), [cart])
   useEffect(() => localStorage.setItem('burger-favorites', JSON.stringify(favorites)), [favorites])
   useEffect(() => {
@@ -97,6 +108,7 @@ function App() {
     setPath(target.pathname)
     setNavigationTarget({ hash: target.hash })
     setMenuOpen(false)
+    setMegaMenuOpen(false)
     if (target.pathname.startsWith('/checkout') || target.pathname.startsWith('/orders/')) {
       window.scrollTo({ top: 0, behavior: 'instant' })
     }
@@ -116,7 +128,7 @@ function App() {
   const isMenu = path === '/' || path === '/menu'
   const orderQueueNumber = path.match(/^\/orders\/(A\d{3,})$/)?.[1]
   return <div className="app-shell">
-    <Navigation path={path} menuOpen={menuOpen} itemCount={itemCount} logo={logo} onNavigate={navigate} onToggleMenu={() => setMenuOpen((open) => !open)} />
+    <Navigation path={path} menuOpen={menuOpen} megaMenuOpen={megaMenuOpen} itemCount={itemCount} logo={logo} onNavigate={navigate} onToggleMenu={() => setMenuOpen((open) => !open)} onMegaMenuOpenChange={setMegaMenuOpen} />
     {isMenu ? <main className="menu-page">
       <Banner />
       <Product favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
@@ -135,12 +147,16 @@ function App() {
       <TBCafeSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
       <DrinksSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
       <DessertsSection favoriteIds={favorites} onQuickView={openProduct} onToggleFavorite={toggleFavorite} onAddToCart={addToCart} />
+      <button className="back-home-button home-back-to-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m3 10 5-5 5 5" /></svg>
+        <span>Back to Top</span>
+      </button>
     </main> : path === '/cart' ? <main className="content-page cart-page">
       <h1>YOUR CART</h1>
       {cart.length === 0 ? <p className="empty-state">Your cart is waiting for something delicious.</p> : <>
         <div className="cart-list">{cart.map((item) => <div className="cart-item" key={`${item.id}-${item.variation}`}>
-          <img src={item.image} alt="" />
-          <div><h2>{item.name}</h2><p>₱{item.price.toFixed(2)} each</p><div className="quantity">
+          <img className="cart-item-image" src={item.image} alt="" />
+          <div className="cart-item-details"><h2>{item.name}</h2><p>₱{item.price.toFixed(2)} each</p><div className="quantity">
             <button onClick={() => changeQuantity(item.id, item.variation, -1)} disabled={item.quantity <= 1}>-</button>
             <span>{item.quantity}</span>
             <button onClick={() => changeQuantity(item.id, item.variation, 1)}>+</button>
@@ -162,6 +178,7 @@ function App() {
       onNavigate={navigate}
       onOrderCreated={(order: OrderSummary) => { setCart([]); navigate(`/orders/${order.queueNumber}`) }}
     /> : orderQueueNumber ? <OrderConfirmation queueNumber={orderQueueNumber} onNavigate={navigate} />
+    : path === '/contact' ? <ContactPage onNavigate={navigate} />
     : path === '/shop' ? <main className="restaurants-page"><div className="restaurants-content">
       <button className="back-home-button" onClick={() => navigate('/')}>‹ <span>Back to Home</span></button>
       <h1>Restaurants</h1>
@@ -173,12 +190,20 @@ function App() {
         </div>
       </section>
       <RestaurantBranchFeature />
+      <button className="shop-back-to-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 10 5-5 5 5" /></svg>
+        <span>Back to Top</span>
+      </button>
     </div></main> : <main className="content-page">
       <h1>{path.slice(1).toUpperCase()}</h1>
       <p>We're cooking up something delicious. Visit our menu to discover your next favorite burger.</p>
       <button className="dark-button" onClick={() => navigate('/menu')}>VIEW OUR MENU</button>
     </main>}
+    {(isMenu || path === '/shop' || path === '/contact') && <SiteFooter logo={logo} onNavigate={navigate} onOrderNow={() => { navigate('/menu'); setMenuOpen(true); setMegaMenuOpen(true); window.scrollTo({ top: 0, behavior: 'instant' }) }} />}
     <BurgerVariationModal key={`${selectedProduct?.id ?? 'none'}-${isVariationModalOpen}`} product={selectedProduct} isOpen={isVariationModalOpen} onClose={() => { setIsVariationModalOpen(false); setSelectedProduct(null) }} onAddToCart={addToCart} />
+    {showIntro && <div className="splash-intro" role="status" aria-label="Loading Tasty Burger">
+      <img src={logo} alt="Tasty Burger" />
+    </div>}
   </div>
 }
 

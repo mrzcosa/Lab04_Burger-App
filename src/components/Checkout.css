@@ -58,7 +58,8 @@
 .checkout-empty .checkout-primary-button { margin-top: 24px; }
 .confirmation-page { display: grid; justify-items: center; }
 .confirmation-card { width: min(620px, 100%); padding: 35px clamp(20px, 5vw, 46px); text-align: center; }
-.confirmation-check { display: grid; width: 54px; height: 54px; place-items: center; margin: 0 auto 17px; border-radius: 50%; background: #eaf7ed; color: #2d9b54; font-size: 29px; font-weight: 800; }
+.confirmation-check { display: grid; width: 66px; height: 66px; place-items: center; margin: 0 auto 17px; border: 1px solid #d7efde; border-radius: 50%; background: radial-gradient(circle at 35% 28%, #f8fff9, #e3f5e8 72%); color: #16803c; box-shadow: 0 8px 22px rgba(22, 128, 60, .12), inset 0 1px 0 rgba(255, 255, 255, .9); }
+.confirmation-check svg { width: 40px; height: 40px; overflow: visible; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 5; }
 .confirmation-intro { margin: 0 0 18px; color: #777; font-size: 14px; }
 .queue-number-label { margin-top: 18px; color: #777; font-size: 11px; font-weight: 900; letter-spacing: 1.3px; }
 .queue-number { margin: 2px 0 15px; color: var(--red); font-family: 'Cooper Black', 'Arial Rounded MT Bold', Georgia, serif; font-size: clamp(56px, 12vw, 78px); font-weight: 900; letter-spacing: 2px; line-height: 1.1; }
