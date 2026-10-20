@@ -4,6 +4,7 @@ import Checkout from './components/Checkout'
 import OrderConfirmation from './components/OrderConfirmation'
 import SiteFooter from './components/SiteFooter'
 import ContactPage from './components/ContactPage'
+import AboutPage from './components/AboutPage'
 import Banner from './components/Banner'
 import Navigation from './components/Navigation'
 import { AllDayBreakfastSection, BurgerVariationModal, ChickenRiceMealsSection, DessertsSection, DrinksSection, FlameGrilledSection, FourCheeseWhopperSection, GroupMeals, PlantBasedWhopperSection, Product, TBCafeSection, TBChickenBurgerSection, TBSaversBundles, TBSpecialSection, UltimateSideKicksSection, WhopperSection, XtraLongChickenSection } from './components/Product'
@@ -178,6 +179,7 @@ function App() {
       onNavigate={navigate}
       onOrderCreated={(order: OrderSummary) => { setCart([]); navigate(`/orders/${order.queueNumber}`) }}
     /> : orderQueueNumber ? <OrderConfirmation queueNumber={orderQueueNumber} onNavigate={navigate} />
+    : path === '/about' ? <AboutPage onNavigate={navigate} />
     : path === '/contact' ? <ContactPage onNavigate={navigate} />
     : path === '/shop' ? <main className="restaurants-page"><div className="restaurants-content">
       <button className="back-home-button" onClick={() => navigate('/')}>‹ <span>Back to Home</span></button>
@@ -199,7 +201,7 @@ function App() {
       <p>We're cooking up something delicious. Visit our menu to discover your next favorite burger.</p>
       <button className="dark-button" onClick={() => navigate('/menu')}>VIEW OUR MENU</button>
     </main>}
-    {(isMenu || path === '/shop' || path === '/contact') && <SiteFooter logo={logo} onNavigate={navigate} onOrderNow={() => { navigate('/menu'); setMenuOpen(true); setMegaMenuOpen(true); window.scrollTo({ top: 0, behavior: 'instant' }) }} />}
+    {(isMenu || path === '/shop' || path === '/contact' || path === '/about') && <SiteFooter logo={logo} onNavigate={navigate} onOrderNow={() => { navigate('/menu'); setMenuOpen(true); setMegaMenuOpen(true); window.scrollTo({ top: 0, behavior: 'instant' }) }} />}
     <BurgerVariationModal key={`${selectedProduct?.id ?? 'none'}-${isVariationModalOpen}`} product={selectedProduct} isOpen={isVariationModalOpen} onClose={() => { setIsVariationModalOpen(false); setSelectedProduct(null) }} onAddToCart={addToCart} />
     {showIntro && <div className="splash-intro" role="status" aria-label="Loading Tasty Burger">
       <img src={logo} alt="Tasty Burger" />
